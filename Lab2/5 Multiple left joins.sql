@@ -1,0 +1,10 @@
+--Display last name, department id and name, city and job of all employees 
+--whose department is located in Oxford
+
+--Solution
+SELECT E.LAST_NAME, E.DEPARTMENT_ID, DEPARTMENT_NAME, CITY, JOB_TITLE
+FROM EMPLOYEES E
+LEFT JOIN JOBS J ON E.JOB_ID = J.JOB_ID
+LEFT JOIN DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+LEFT JOIN LOCATIONS L ON D.LOCATION_ID = L.LOCATION_ID
+WHERE LOWER(CITY) = 'oxford'
