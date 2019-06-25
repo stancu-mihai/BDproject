@@ -1,0 +1,4 @@
+ --WHERE clause is used for filtering rows and it applies on each and every row, 
+ --while HAVING clause is used to filter groups in SQL. 
+ --One syntax level difference between WHERE and HAVING clause is that, 
+ --former is used before GROUP BY clause, while later is used after GROUP BY clause.
