@@ -48,11 +48,33 @@ CREATE TABLE CABINET (
   CONSTRAINT pk_cabinet PRIMARY KEY (id_cabinet)
 );
 
+INSERT INTO CABINET  (id_clinic, id_cabinet, speciality)
+VALUES (1, 1, 'Dermathology');
+
+INSERT INTO CABINET  (id_clinic, id_cabinet, speciality)
+VALUES (1, 2, 'Imagistics');
+
+INSERT INTO CABINET  (id_clinic, id_cabinet, speciality)
+VALUES (1, 3, 'Psichology');
+
+INSERT INTO CABINET  (id_clinic, id_cabinet, speciality)
+VALUES (2, 4, 'Orthopedy');
+
+INSERT INTO CABINET  (id_clinic, id_cabinet, speciality)
+VALUES (2, 5, 'Neurology');
+
 CREATE TABLE MEDIC (
   id number(9),
   last_name varchar2(50),
   CONSTRAINT pk_medic PRIMARY KEY (id)
 );
+
+INSERT INTO MEDIC  (id, last_name)
+VALUES (1, 'Medic1');
+
+INSERT INTO MEDIC  (id, last_name)
+VALUES (2, 'Medic2');
+
 
 --1. Create table APPOINTMENT and its integrity constraints
 
@@ -70,6 +92,13 @@ CREATE TABLE APPOINTMENT (
   CONSTRAINT medic_fk FOREIGN KEY (id_medic) REFERENCES MEDIC(id),
   CONSTRAINT pacient_fk FOREIGN KEY (id_pacient) REFERENCES PACIENT(id)
 );
+
+--Dummy data, out of scope for point 1, required for point 2
+INSERT INTO APPOINTMENT  (id, id_clinic, id_cabinet, id_medic, id_pacient, a_date, a_time)
+VALUES 
+(1, 1, 1, 1, 1, '01-JUN-19', "19.50.00"),
+(1, 1, 2, 2, 2, '02-JUN-19', "20.30.00"),
+(1, 2, 2, 2, 2, '02-MAY-19', "20.30.00");
 
 -- 2.	Update CLINIC.no_appointments such that it contains 
 -- the number of appointments from the current month, for each clinic
