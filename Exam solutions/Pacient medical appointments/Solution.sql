@@ -105,3 +105,48 @@ VALUES (3, 2, 2, 2, 2, '02-MAY-19', '20.30.00');
 
 -- 2.	Update CLINIC.no_appointments such that it contains 
 -- the number of appointments from the current month, for each clinic
+
+-- Intermediary: find number of appointments for each clinic for current month
+
+select id_clinic_ms, count(id_medic_ms) as "no_of_appointments"
+from appointment_ms
+where a_date like '%JUN-19'
+group by id_clinic_ms
+
+--Final result
+
+UPDATE clinic_ms
+SET no_appointments=(
+  SELECT COUNT(a_date) 
+  FROM appointment_ms 
+  WHERE a_date BETWEEN trunc(sysdate, 'mm') AND SYSDATE AND clinic_ms.id = appointment_ms.id_clinic_ms)
+;
+
+-- 3.	Obtain the names of the pacients who have an appointment
+-- to any of the doctor who treated the oldest pacient (assume one is oldest)
+-- the same number of times with him
+
+-- Intermediary: find id of the oldest pacient
+select id
+from pacient_ms
+WHERE
+  rownum <= 1
+order by birth_date asc;
+
+-- Intermediary: obtain the doctors who treated the oldest pacient
+
+select * from appointment_ms
+where id_pacient_ms = (select id from pacient_ms WHERE rownum <= 1  )
+
+-- 4. Show information about clinics (id, city), 
+-- their cabinets (id, specialty),
+-- and medics (id, name) that had appointments there
+
+select a.id_clinic_ms, cl.city, ca.id_cabinet_ms, ca.speciality, m.id, m.last_name
+from appointment_ms a
+join clinic_ms cl 
+on a.id_clinic_ms=cl.id
+join cabinet_ms ca
+on a.id_cabinet_ms=ca.id_cabinet_ms
+join medic_ms m
+on a.id_medic_ms=m.id
