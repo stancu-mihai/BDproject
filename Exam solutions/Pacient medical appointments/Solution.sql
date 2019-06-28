@@ -95,10 +95,13 @@ CREATE TABLE APPOINTMENT (
 
 --Dummy data, out of scope for point 1, required for point 2
 INSERT INTO APPOINTMENT  (id, id_clinic, id_cabinet, id_medic, id_pacient, a_date, a_time)
-VALUES 
-(1, 1, 1, 1, 1, '01-JUN-19', "19.50.00"),
-(1, 1, 2, 2, 2, '02-JUN-19', "20.30.00"),
-(1, 2, 2, 2, 2, '02-MAY-19', "20.30.00");
+VALUES (1, 1, 1, 1, 1, '01-JUN-19', '19.50.00');
+
+INSERT INTO APPOINTMENT  (id, id_clinic, id_cabinet, id_medic, id_pacient, a_date, a_time)
+VALUES(2, 1, 2, 2, 2, '02-JUN-19', '20.30.00');
+
+INSERT INTO APPOINTMENT  (id, id_clinic, id_cabinet, id_medic, id_pacient, a_date, a_time)
+VALUES (3, 2, 2, 2, 2, '02-MAY-19', '20.30.00');
 
 -- 2.	Update CLINIC.no_appointments such that it contains 
 -- the number of appointments from the current month, for each clinic
