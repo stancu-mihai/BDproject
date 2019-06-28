@@ -134,9 +134,15 @@ WHERE
 order by birth_date asc;
 
 -- Intermediary: obtain the doctors who treated the oldest pacient
-
-select * from appointment_ms
-where id_pacient_ms = (select id from pacient_ms WHERE rownum <= 1  )
+-- and the number of appointments
+select count(id) as "appointments", id_medic_ms from appointment_ms
+where id_pacient_ms=( --oldest pacient
+    select id
+    from pacient_ms
+    WHERE
+    rownum <= 1
+)
+group by id_medic_ms
 
 -- 4. Show information about clinics (id, city), 
 -- their cabinets (id, specialty),
