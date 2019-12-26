@@ -144,6 +144,17 @@ where id_pacient_ms=( --oldest pacient
 )
 group by id_medic_ms
 
+--another trial
+SELECT DISTINCT pacient.nume || ' ' || pacient.prenume "Pacient"
+FROM programare
+INNER JOIN pacient ON pacient.id = programare.id_pacient 
+INNER JOIN medic ON medic.id = programare.id_medic
+WHERE medic.id IN (SELECT DISTINCT medic.id
+                    FROM programare
+                    INNER JOIN pacient ON pacient.id = programare.id_pacient 
+                    INNER JOIN medic ON medic.id = programare.id_medic
+                    WHERE pacient.id = (SELECT ID FROM PACIENT WHERE DATA_NASTERE = (SELECT MIN(DATA_NASTERE) FROM PACIENT)));
+
 -- 4. Show information about clinics (id, city), 
 -- their cabinets (id, specialty),
 -- and medics (id, name) that had appointments there
