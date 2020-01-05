@@ -12,7 +12,7 @@ WHERE DEPARTMENT_ID =
 AND LOWER(LAST_NAME) != 'gates'
 AND LAST_NAME LIKE '%a%'
 
--- QUESTION
+-- Intrebare: Putem primi la examen exercitii care sa faca referire la standardele SQL, ca cea de mai jos?
 -- 2. Să se afişeze codul şi numele angajaţilor care lucrează în acelasi departament cu
 -- cel puţin un angajat al cărui nume conţine litera “t”. Se vor afişa, de asemenea, codul şi 
 -- numele departamentului respectiv. Rezultatul va fi ordonat alfabetic după nume. Se vor
@@ -153,7 +153,7 @@ WHERE MANAGER_ID =
     FROM EMPLOYEES
     WHERE MANAGER_ID IS NULL)
 
--- QUESTION: Al carui angajat? Oricare?
+-- Intrebare: Al carui angajat? Oricare? Facem pentru fiecare?
 -- 18. Scrieti o cerere pentru a afişa numele, codul departamentului si salariul angajatilor
 -- al caror număr de departament si salariu coincid cu numarul departamentului si salariul
 -- unui angajat care castiga comision.

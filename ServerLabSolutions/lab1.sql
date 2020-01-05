@@ -29,7 +29,7 @@ SELECT * FROM LOCATIONS;
 SELECT * FROM COUNTRIES;
 SELECT * FROM REGIONS;
 
--- QUESTION
+-- Intrebare: Este selectie sau proiectie? Care este regula?
 -- 5. Să se afişeze codul angajatului, numele, codul job-ului, data angajarii. Ce fel de
 -- operaţie este aceasta (selecţie sau proiecţie)?. 
 SELECT EMPLOYEE_ID, FIRST_NAME, JOB_ID, HIRE_DATE FROM EMPLOYEES
@@ -138,9 +138,9 @@ FROM EMPLOYEES
 WHERE COMMISSION_PCT IS NOT NULL
 ORDER BY SALARY DESC, COMMISSION_PCT DESC
 
--- QUESTION
 -- 19. Eliminaţi clauza WHERE din cererea anterioară. Unde sunt plasate valorile NULL în
 -- ordinea descrescătoare? 
+Peste tot, dar mai mult la sfarsit
 
 -- 20. Să se listeze numele tuturor angajatilor care au a treia literă din nume ‘A’.
 -- Obs: Pentru compararea şirurilor de caractere, împreună cu operatorul LIKE se

@@ -83,7 +83,7 @@ SELECT FIRST_NAME, LAST_NAME, ROUND(MONTHS_BETWEEN(SYSDATE, HIRE_DATE)) "Luni Lu
 FROM EMPLOYEES
 ORDER BY 3 ASC
 
--- QUESTION
+-- Intrebare: Cum facem sortarea incepand cu "Luni"?
 -- 13. Să se afişeze numele, data angajării şi ziua săptămânii în care a început lucrul fiecare
 -- salariat. Etichetaţi coloana “Zi”. Ordonaţi rezultatul după ziua săptămânii, începând cu
 -- Luni. 
@@ -102,11 +102,16 @@ SELECT FIRST_NAME, LAST_NAME, COMMISSION_PCT * SALARY "Comision"
 FROM EMPLOYEES
 WHERE COMMISSION_PCT * SALARY + SALARY > 10000
 
--- QUESTION
 -- 16. Să se afişeze numele, codul job-ului, salariul şi o coloană care să arate salariul după
 -- mărire. Se presupune că pentru IT_PROG are loc o mărire de 20%, pentru SA_REP
 -- creşterea este de 25%, iar pentru SA_MAN are loc o mărire de 35%. Pentru ceilalţi
 -- angajaţi nu se acordă mărire. Să se denumească coloana "Salariu renegociat". 
+SELECT FIRST_NAME, LAST_NAME, JOB_ID, SALARY, 
+DECODE(JOB_ID, 'IT_PROG', SALARY*1.2,
+               'SA_REP', SALARY*1.25,
+               'SA_MAN', SALARY*1.35,
+               SALARY) "Sal_renegociat"
+FROM EMPLOYEES
 
 -- 17. Să se afişeze numele salariatului, codul şi numele departamentului pentru toţi angajaţii.
 -- Obs: Numele sau alias-urile tabelelor sunt obligatorii în dreptul coloanelor care au acelaşi
@@ -155,7 +160,7 @@ SELECT E1.FIRST_NAME "Angajat FN", E1.LAST_NAME "Angajat LN", E1.EMPLOYEE_ID "An
 FROM EMPLOYEES E1
 LEFT JOIN EMPLOYEES E2 ON E1.MANAGER_ID=E2.EMPLOYEE_ID
 
--- QUESTION
+-- Intrebare: Al carui angajat? Facem asta pentru fiecare angajat?
 -- 24. Creaţi o cerere care să afişeze numele angajatului, codul departamentului şi toţi salariaţii
 -- care lucrează în acelaşi departament cu el. Se vor eticheta coloanele corespunzător.
 SELECT FIRST_NAME, LAST_NAME, DEPARTMENT_ID
