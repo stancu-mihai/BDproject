@@ -1,5 +1,7 @@
 --decode( expression, value , value if true  , value if false )
 
+--!!!!! DECODE NOT AVAILABLE IN PL/SQL, ONLY AVAILABLE IN SQL !!!!!
+
 
 SELECT supplier_name,
 DECODE(supplier_id, 10000, 'IBM',
