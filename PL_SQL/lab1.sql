@@ -11,54 +11,47 @@ select last_name, salary, hire_date
 from employees
 where department_id = &cod;
 
---pl/sql first
+--First PL/SQL program: Write 1 row 1 column into a variable (with DbMS output window)
 declare
 v_nume varchar(25);
-
 begin
 select last_name into  v_nume --, salary, hire_date 
 from employees
 where department_id = 10;
---DBMS.PUT_LINE (Database message output), requires toolbar from VIew/DBMS output (and the connection associated with "+")
+--(Database message output), requires toolbar from "View/DBMS output" (and the connection associated with "+")
 DBMS_OUTPUT.PUT_LINE(v_nume);
 end;
 
 --without DbMS output window
-set serveroutput on 
+set serveroutput on --add this to output directly to main console window
 declare
 v_nume varchar(25);
-
 begin
 select last_name into  v_nume --, salary, hire_date 
 from employees
 where department_id = 10;
---DBMS.PUT_LINE (Database message output), requires toolbar from VIew/DBMS output (and the connection associated with "+")
 DBMS_OUTPUT.PUT_LINE('Result'||v_nume);
 end;
 
--- get more than one field, not recommended because it is not scallable
+-- (still one row, multiple columns) get more than one field, not recommended because it is not scallable
 set serveroutput on 
 declare
 v_nume employees.last_name%type; --get type from table
 v_sal employees.salary%type;
 v_data employees.hire_date%type;
-
 begin
 select last_name, salary, hire_date into v_nume, v_sal, v_data
 from employees
 where department_id = 10;
---DBMS.PUT_LINE (Database message output), requires toolbar from VIew/DBMS output (and the connection associated with "+")
 DBMS_OUTPUT.PUT_LINE('Result: '||v_nume||' cu salariul '||v_sal);
 end;
 
-
--- get more than one line of result
+--(multiple rows, one column, fixed array) get more than one line of result
 set serveroutput on 
 declare
 v_nume employees.last_name%type;
 type angajati_nume is array(150) of v_nume%type;
 vector_nume angajati_nume;
-
 begin
 select last_name bulk collect into vector_nume
 from employees
@@ -66,13 +59,12 @@ where department_id = 50;
 DBMS_OUTPUT.PUT_LINE('Result: '||v_nume);
 end;
 
---display array results for one field
+--display array results for one field (loop for result display)
 set serveroutput on 
 declare
 v_nume employees.last_name%type;
 type angajati_nume is array(150) of v_nume%type;
 vector_nume angajati_nume;
-
 begin
 select last_name bulk collect into vector_nume
 from employees
@@ -82,8 +74,7 @@ for i in 1..vector_nume.count loop
 end loop;
 end;
 
-
--- display array results for multiple fields
+-- (multiple rows, multiple columns, fixed arrays) display array results for multiple fields
 set serveroutput on 
 declare
 v_nume employees.last_name%type;
@@ -102,8 +93,7 @@ for i in 1..vector_nume.count loop
 end loop;
 end;
 
-
--- read from keyboard
+-- read department_id from keyboard
 set serveroutput on 
 declare
 v_cod employees.department_id%type := &dep; 
@@ -191,6 +181,7 @@ x number;
 
 begin
 
+--count employees in department
 select count(*) into x
 from employees
 where department_id=v_cod;

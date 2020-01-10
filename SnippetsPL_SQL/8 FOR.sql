@@ -3,6 +3,10 @@ secvenţa_de_comenzi;
 END LOOP;
 
 
+for i in 1..vector_nume.count loop
+    DBMS_OUTPUT.PUT_LINE('Result: '||vector_nume(i));
+end loop;
+
 
 ALTER TABLE opera
 ADD stea VARCHAR2(20);
