@@ -402,3 +402,30 @@ OPEN v_emp FOR
 USING v_nr;
 -- introduceti liniile corespunzatoare rezolvării problemei
 END;
+
+--Solutia mea
+set SERVEROUTPUT on;
+DECLARE
+TYPE empref IS REF CURSOR;
+V_emp empref;
+v_nr INTEGER := &p_nr;
+type linie is record(cod employees.employee_id%type,
+                    nume employees.last_name%type,
+                    sal employees.salary%type,
+                    com employees.commission_pct%type);
+type tab_linii is table of linie index by pls_integer;
+v tab_linii;
+BEGIN
+    OPEN v_emp FOR
+        'SELECT employee_id, last_name, salary, commission_pct FROM emp_pnu WHERE salary> :bind_var'
+        USING v_nr;
+    FETCH v_emp bulk collect into v;
+    ClOse v_emp;
+    for i in 1..v.count LOOP
+        if v(i).com is not null THEN
+            dbms_output.put_line(v(i).nume || '' || v(i).sal);
+        end if;
+    end loop;
+    DBMS_OUTPUT.PUT_LINE('');
+END;
+--se inlocuieste ":bind_var" cu v_nr (variabila de legatura)
